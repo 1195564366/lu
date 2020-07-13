@@ -37,12 +37,13 @@
 </template>
 
 <script>
+import account from '../../public/account'
 export default {
   data () {
     return {
-      account: [],
+      account: account,
       count: 0,
-      open_id: null,
+      open_id: account[0].value,
       vehicle_number: null, // 车牌
       org_id: null, // 场站
       current: null,
@@ -55,10 +56,6 @@ export default {
     accountName () {
       return this.account.filter(item => item.value === this.open_id)[0].label
     }
-  },
-  created () {
-    this.account = this.$account
-    this.open_id = this.account[0].value
   },
   mounted () {
     this.getList()

@@ -44,14 +44,24 @@
     </van-popup>
     <!-- 场站end -->
     <!-- 车牌号start -->
-     <van-field
-      v-model="form.vehicle_number"
+    <van-field
+      readonly
+      clickable
       name="vehicle_number"
+      :value="form.vehicle_number"
       label="车牌号"
-      placeholder="请输入车牌号"
-      maxlength="7"
-      :rules="[{ required: true, message: '请输入车牌号' }]"
+      placeholder="点击选择车牌号"
+      @click="carNumberShow = true"
+      :rules="[{ required: true, message: '请选择车牌号' }]"
     />
+    <van-popup v-model="carNumberShow" position="bottom">
+      <van-picker
+        show-toolbar
+        :columns="carNumber"
+        @confirm="onCarNumberConfirm"
+        @cancel="carNumberShow = false"
+      />
+    </van-popup>
     <!-- 车牌号end -->
     <!-- 姓名start -->
      <van-field
@@ -124,13 +134,19 @@
 </template>
 
 <script>
+import account from '../../public/account'
+import name from '../../public/name'
+import carNumber from '../../public/carNumber'
+import phone from '../../public/phone'
+
 export default {
   data () {
     return {
-      accountList: [],
+      accountList: account,
       accountShow: false,
       addressShow: false,
       addressList: [],
+      carNumberShow: false,
       goodShow: false,
       goodList: [{
         label: "卵石",
@@ -166,9 +182,6 @@ export default {
       }
     }
   },
-  created () {
-    this.accountList = this.$account
-  },
   mounted () {
     this.getAddressList()
   },
@@ -191,6 +204,9 @@ export default {
       this.form.open_id = e.value
       this.labelObj.open_id = e.label
       this.accountShow = false
+    },
+    onCarNumberConfirm (e) {
+      console.log(e)
     },
     json2Form (t) {
       var e = [];

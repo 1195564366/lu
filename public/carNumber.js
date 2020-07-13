@@ -1,0 +1,1 @@
+export default ['陕AQ7193', '陕AS1973']

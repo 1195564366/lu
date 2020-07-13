@@ -11,11 +11,9 @@ import 'lib-flexible/flexible'
 
 import './style/index.scss'
 import 'static/iconfont/iconfont.css'
-import account from '../public/account'
 
 import { fetchPost, fetchGet } from './axios'
 import api from './api'
-console.log(account)
 // import Vconsole from 'vconsole'
 
 // const vconsole = new Vconsole()
@@ -28,7 +26,6 @@ Vue.config.productionTip = false
 Vue.prototype.$fetchPost = fetchPost
 Vue.prototype.$fetchGet = fetchGet
 Vue.prototype.$api = api
-Vue.prototype.$account = account
 Vue.use(Vant)
 
 new Vue({
