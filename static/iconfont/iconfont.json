@@ -1,0 +1,65 @@
+{
+  "id": "1736889",
+  "name": "重庆大管家",
+  "font_family": "my-icon",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5801018",
+      "name": "未选中",
+      "font_class": "noChecked",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "1105000",
+      "name": "日历",
+      "font_class": "calendar",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "649314",
+      "name": "右",
+      "font_class": "right",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "1269",
+      "name": "加",
+      "font_class": "add",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "1173185",
+      "name": "车巴巴-下拉框箭头1",
+      "font_class": "select",
+      "unicode": "e66c",
+      "unicode_decimal": 58988
+    },
+    {
+      "icon_id": "1517010",
+      "name": "选中",
+      "font_class": "checked",
+      "unicode": "e64d",
+      "unicode_decimal": 58957
+    },
+    {
+      "icon_id": "5675185",
+      "name": "地址",
+      "font_class": "address",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "13546347",
+      "name": "返回",
+      "font_class": "return",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    }
+  ]
+}

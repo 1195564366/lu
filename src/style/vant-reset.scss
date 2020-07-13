@@ -1,0 +1,205 @@
+// 根据项目适配vant样式
+.van-button {
+    height: 60px;
+    line-height: 60px;
+    border-radius: 10px;
+    &--plain {
+        border: 1PX solid #75BAFA;
+    }
+    span {
+        font-size: 30px;
+    }
+}
+.van-stepper__minus {
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: 1PX solid #E5E5E5;
+    &::before {
+        width: 20px;
+        height: 2px;
+    }
+    &--disabled {
+        border: 1PX solid #E4E4E4;
+    }
+}
+.van-stepper__plus {
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: 1PX solid #E5E5E5;
+    &::before {
+        width: 20px;
+        height: 2px;
+    }
+    &::after {
+        width: 2px;
+        height: 20px;
+    }
+}
+.van-stepper__input {
+    width: 40px;
+    height: 40px;
+    color: #FE761F;
+    background-color: transparent;
+    &[disabled] {
+        color: #FE761F;
+        background-color: transparent;
+    }
+}
+
+// 提交订单栏
+.van-submit-bar {
+    &__bar {
+        height: 100px;
+        background: #F9F9F9;
+    }
+    &__text {
+        text-align: left;
+        color: #FE761F;
+        font-size: 30px;
+        font-weight: bold;
+        padding-left: 42px;
+    }
+    &__price {
+        color: #FE761F;
+        font-size: 30px;
+        font-weight: bold;
+    }
+    &__button {
+        height: 100px;
+        width: 200px;
+        border-radius: 0;
+        background: #75BAFA;
+        border: none;
+        font-size: 30px;
+        font-weight: bold;
+        &:active {
+            background: #4EA6F7;
+        }
+        &::before {
+            background: #4EA6F7;
+        }
+    }
+}
+
+.van-toast{
+    &--text {
+        width: 240px;
+        padding: 30px 24px;
+        border-radius: 8px;
+        font-size: 30px;
+        line-height: 40px;
+    }
+}
+
+.van-picker {
+    &__toolbar {
+        height: 100px;
+    }
+    &__cancel, &__confirm {
+        font-size: 30px;
+    }
+    &-column {
+        font-size: 30px;
+    }
+}
+
+
+.van-overlay {
+    background-color: rgba(0,0,0,0.5);
+}
+
+.van-dialog {
+    width: 90%;
+    &__header {
+        font-size: 36px;
+        // font-weight: bold;
+        color: #333;
+        line-height: 80px;
+        padding: 40px 0;
+    }
+    &__message {
+        font-size: 30px;
+        line-height: 50px;
+    }
+    &__footer--buttons {
+        // padding: 20px 0;
+        .van-button {
+            line-height: 100px;
+            height: 100px;
+            font-size: 30px;
+        }
+    }
+    &__confirm {
+        line-height: 100px;
+        height: 100px;
+        font-size: 30px;
+    }
+}
+.van-tabs {
+    &__wrap {
+        height: 30px!important;
+    }
+    .van-tab {
+        line-height: 30px;
+        border-left: 1PX solid #E8E8E8;
+        &:first-child {
+            border-left: none;
+        }
+        .van-ellipsis {
+            font-size: 28px;
+        }
+    }
+    .van-tabs__line {
+        display: none;
+    }
+    [class*=van-hairline]::after {
+        border: none;
+    }
+}
+
+.van-rate {
+    &__icon {
+        width: 30px;
+        height: 30px;;
+    }
+    .van-icon__image {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.van-action-sheet__item {
+    height: 100px;
+    font-size: 30px;
+}
+
+.van-tabbar {
+    height: 100px;
+    &-item {
+        &__icon {
+            font-size: 40px;
+        }
+        font-size: 30px;
+    }
+}
+.van-form {
+    .van-cell {
+       padding: 20px;
+       line-height: 50px;
+       font-size: 30px;
+    }
+}
+.van-uploader__upload, .van-uploader__preview-image {
+    width: 200px;
+    height: 200px;
+}
+.van-uploader__upload-icon {
+    font-size: 80px;
+}
+.van-uploader__preview-delete {
+    right: -20px;
+    top: -20px;
+    font-size: 40px;
+}

@@ -1,0 +1,14 @@
+@import './reset.scss';
+@import './vant-reset.scss';
+
+@font-face{
+    font-family: 'YaHei Consolas Hybrid';
+    src : url('~static/font/苹方字体.ttf');
+}
+body, * {
+    font-family: 'YaHei Consolas Hybrid';
+    // background: #ffffff;
+}
+.container {
+    padding: 96px 0 120px 0;
+}
