@@ -57,7 +57,7 @@
     <van-popup v-model="carNumberShow" position="bottom">
       <van-picker
         show-toolbar
-        :columns="carNumber"
+        :columns="carNumberList"
         @confirm="onCarNumberConfirm"
         @cancel="carNumberShow = false"
       />
@@ -147,6 +147,7 @@ export default {
       addressShow: false,
       addressList: [],
       carNumberShow: false,
+      carNumberList: carNumber,
       goodShow: false,
       goodList: [{
         label: "卵石",
@@ -206,7 +207,8 @@ export default {
       this.accountShow = false
     },
     onCarNumberConfirm (e) {
-      console.log(e)
+      this.form.vehicle_number = e
+      this.carNumberShow = false
     },
     json2Form (t) {
       var e = [];
