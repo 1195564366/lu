@@ -4,8 +4,8 @@
       当前账号 {{ accountName }}
     </div>
     <div class="top-container" @click="getList1" v-if="list.length">
-      <div class="current">当前位置第 {{ current }} 位 </div>
-      <div class="total">总共{{ total }}位</div>
+      <div class="current">当前位置第 {{ number }} 位 </div>
+      <div class="total">{{ goodList[list[0].goods_type].label }}：总共{{ list.length }}位</div>
     </div>
     <div class="table" v-if="list.length">
       <div class="table-header">
@@ -41,6 +41,22 @@
 export default {
   data () {
     return {
+      goodList: [{
+        label: "卵石",
+        value: 0
+      }, {
+        label: "碎石",
+        value: 1
+      }, {
+        label: "细石",
+        value: 2
+      }, {
+        label: "粗砂",
+        value: 3
+      }, {
+        label: "汉中砂",
+        value: 4
+      }],
       account: window.account,
       count: 0,
       open_id: account[0].value,
@@ -55,6 +71,9 @@ export default {
   computed: {
     accountName () {
       return this.account.filter(item => item.value === this.open_id)[0].label
+    },
+    number () {
+      return this.list.findIndex(item => item.vehicle_number === this.vehicle_number) + 1
     }
   },
   mounted () {
