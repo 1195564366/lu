@@ -134,20 +134,19 @@
 </template>
 
 <script>
-import account from '../../public/account'
-import name from '../../public/name'
-import carNumber from '../../public/carNumber'
-import phone from '../../public/phone'
-
+// import account from '../../public/account.json'
+// import name from '../../public/name'
+// import carNumber from '../../public/carNumber.json'
+// import phone from '../../public/phone'
 export default {
   data () {
     return {
-      accountList: account,
+      accountList: window.account,
       accountShow: false,
       addressShow: false,
       addressList: [],
       carNumberShow: false,
-      carNumberList: carNumber,
+      carNumberList: window.carNumber,
       goodShow: false,
       goodList: [{
         label: "卵石",
@@ -215,7 +214,39 @@ export default {
       for (var n in t) e.push(encodeURIComponent(n) + "=" + encodeURIComponent(t[n]));
       return e.join("&");
     },
+    dataURItoBlob(dataURI, type, fileName) {
+      var binary = atob(dataURI.split(',')[1]);
+      var array = [];
+      for(var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+      const blob = new Blob([new Uint8Array(array)], {type: type});
+      return new File([blob], fileName, {type: type, lastModified: Date.now()});
+    },
+    compress (file) {
+      const imgQuality = 0.5
+      return new Promise(resolve => {
+        const reader = new FileReader()
+        const image = new Image()
+        image.onload = (imageEvent) => {
+          const canvas = document.createElement('canvas');
+          const context = canvas.getContext('2d');
+          const width = image.width * imgQuality
+          const height = image.height * imgQuality
+          canvas.width = width;
+          canvas.height = height;
+          context.clearRect(0, 0, width, height);
+          context.drawImage(image, 0, 0, width, height);
+          const dataUrl = canvas.toDataURL(file.type);
+          const blobData = this.dataURItoBlob(dataUrl, file.type, file.name);
+          resolve(blobData)
+        }
+        reader.onload = (e => { image.src = e.target.result; });
+        reader.readAsDataURL(file);
+      })
+    },
     async onSubmit (values) {
+      let toast
       if (!this.labelObj.file_id1.length) {
         this.$toast('请上传车牌照片')
         return
@@ -241,20 +272,45 @@ export default {
       // 上传车牌照片
       const formData1 = new window.FormData();
       formData1.append('type', 'field') // field identityId  passcheck
-      formData1.append('file', this.labelObj.file_id1[0].file)
-      const file_id1 = await this.$fetchPost(this.$api.uploadFile, formData1)
+      toast = this.$toast.loading({
+        duration: 0, // 持续展示 toast
+        forbidClick: true,
+        message: '车牌照片压缩中...'
+      })
+      const img1 = await this.compress(this.labelObj.file_id1[0].file)
+      toast = this.$toast.loading({
+        duration: 0, // 持续展示 toast
+        forbidClick: true,
+        message: '车牌照片上传中...'
+      })
+      formData1.append('file', img1)
+      const file_id1 = await this.$fetchPost(this.$api.uploadFile, formData1, {noLoading: true})
       if (!file_id1.success) {
+        toast.clear();
         this.$toast(`车牌照片上传失败：${file_id1.msg}`)
         return
       }
       params.file_id.push(file_id1.msg)
 
+
       // 上传身份证
       const formData2 = new window.FormData();
       formData2.append('type', 'identityId') // field identityId  passcheck
-      formData2.append('file', this.labelObj.file_id2[0].file)
-      const file_id2 = await this.$fetchPost(this.$api.uploadFile, formData2)
+      toast = this.$toast.loading({
+        duration: 0, // 持续展示 toast
+        forbidClick: true,
+        message: '身份证照片压缩中...'
+      })
+      const img2 = await this.compress(this.labelObj.file_id2[0].file)
+      formData2.append('file', img2)
+      toast = this.$toast.loading({
+        duration: 0, // 持续展示 toast
+        forbidClick: true,
+        message: '身份证照片上传中...'
+      })
+      const file_id2 = await this.$fetchPost(this.$api.uploadFile, formData2, {noLoading: true})
       if (!file_id2.success) {
+        toast.clear();
         this.$toast(`身份证上传失败：${file_id2.msg}`)
         return
       }
@@ -263,18 +319,38 @@ export default {
       // 上传通行证
       const formData3 = new window.FormData();
       formData3.append('type', 'passcheck') // field identityId  passcheck
-      formData3.append('file', this.labelObj.file_id3[0].file)
-      const file_id3 = await this.$fetchPost(this.$api.uploadFile, formData3)
+      toast = this.$toast.loading({
+        duration: 0, // 持续展示 toast
+        forbidClick: true,
+        message: '通行证照片压缩中...'
+      })
+      const img3 = await this.compress(this.labelObj.file_id3[0].file)
+      formData3.append('file', img3)
+      toast = this.$toast.loading({
+        duration: 0, // 持续展示 toast
+        forbidClick: true,
+        message: '通行证照片上传中...'
+      })
+      const file_id3 = await this.$fetchPost(this.$api.uploadFile, formData3, {noLoading: true})
       if (!file_id3.success) {
+        toast.clear();
         this.$toast(`通行证上传失败：${file_id3.msg}`)
         return
       }
       params.file_id.push(file_id3.msg)
+      toast = this.$toast.loading({
+        duration: 0, // 持续展示 toast
+        forbidClick: true,
+        message: '排队信息提交中...'
+      })
       const result = await this.$fetchGet(`${this.$api.addQueue}?${this.json2Form(params)}`)
       if (!result.success) {
+        toast.clear();
         this.$toast(result.msg)
         return
       }
+      toast.clear();
+      this.$toast('排队信息提交成功')
       this.$router.push('/list')
     }
   }

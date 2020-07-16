@@ -37,11 +37,11 @@
 </template>
 
 <script>
-import account from '../../public/account'
+// import account from '../../public/account.json'
 export default {
   data () {
     return {
-      account: account,
+      account: window.account,
       count: 0,
       open_id: account[0].value,
       vehicle_number: null, // 车牌
